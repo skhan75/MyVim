@@ -1,0 +1,184 @@
+"******************************************"
+
+"   Sami Ahmad Khan Vimrc Configuration    "
+
+"******************************************"
+
+" ----- INIT CONIGS -----"
+
+" Set compatibility to Vim only.
+set nocompatible
+
+" Helps force plug-ins to load correctly when it is turned back on below.
+filetype off
+
+" Turn on syntax highlighting.
+syntax on
+
+" Automatically wrap text that extends beyond the screen length.
+set wrap
+
+" Pathogen Configurations "
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
+
+"---- END INIT CONFIGS ----"
+
+
+
+
+
+
+"---- JAVASCRIPT PLUGINS AND CONFIGURATIONS -----"
+
+let g:javascript_plugin_jsdoc=1
+
+"---- END of JAVASCRIPT PLUGINS AND CONFIGURATIONS ----"
+
+
+
+
+
+
+
+" ----- CONFIGURATION SECTION ----- "
+
+" Uncomment below to set the max textwidth. Use a value corresponding to the width of your screen."
+set textwidth=79
+set formatoptions=tcqrn1
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set noshiftround
+
+" NERDTree Configurations "
+autocmd vimenter * NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+"Always show current position
+set ruler
+
+" Show line numbers
+set number
+
+" Ignore case when searching
+set ignorecase
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" Highlight matching seach patterns "
+set hlsearch
+
+" Highlight macthing pairs of brackets. Use the % character to jump between them
+set matchpairs+=<:>
+
+"Set Proper Tabs"
+set tabstop=4
+set shiftwidth=4
+set smarttab
+set expandtab
+
+"Always display the status line"
+set laststatus=2
+
+
+
+" ----- Syntastic Configurations ----- 
+" Refer --> https://github.com/vim-syntastic/syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" ----- END of Syntastic Configurations ----- 
+
+
+
+" ----- Vim-Airline Configurations ------
+" Refer --> https://github.com/vim-airline/vim-airline
+" Automatically displays all buffers when there's only one tab open
+let g:airline#extensions#tabline#enabled = 1 
+let g:airline_powerline_fonts = 1 
+let g:airline_theme='molokai'
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 
+
+"Mappings for toggling between tabs
+" Toggle Next Tab
+nmap <C-r> :bnext<CR>
+" Toggle Previous Tab
+nmap <C-l> :bprev<CR>
+"Toggle First tab
+nmap <C-f> :bfirst<CR>
+"Toggle Last Tab
+nmap <C-e> :blast<CR>
+
+" ----- END of Vim-Airline configurations -----
+
+
+
+
+" Display 5 lines above/below the cursor when scrolling with a mouse.
+set scrolloff=5
+
+" Fixes common backspace problems
+set backspace=indent,eol,start
+
+" Speed up scrolling in Vim
+set ttyfast
+
+"---- Colors and Fonts Configs ----"
+
+" Enable syntax highlighting
+syntax enable
+
+" Enable 256 colors palette in Gnome Terminal
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
+endif
+
+let base16colorspace=256  " Access colors present in 256 colorspace
+set background=dark
+
+try
+    colorscheme desert
+    " colorscheme spacegray 
+    " colorscheme spacemacs-theme 
+
+catch
+endtry
+
+" ---- End of Colors and fonts configs ---- "
+
+" Display optionis
+set showmode
+set showcmd
+
+" Highlight matching pairs of brackets. Use the '%' character to jump between them.
+set matchpairs+=<:>
+
+" Highlight matching search patterns
+set hlsearch
+
+" Enable incremental search
+set incsearch
+
+" Include matching uppercase words with lowercase search term
+set ignorecase
+
+" Include only uppercase words with uppercase search term
+set smartcase
+
+
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
