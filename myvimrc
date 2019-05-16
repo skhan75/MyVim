@@ -23,12 +23,21 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
+"Color Scheme
+"colorscheme molokai
+"colorscheme gruvbox
+"colorscheme materialbox
+"colorscheme Tomorrow-Night
+"colorscheme Tomorrow-Night-Bright
+"colorscheme atom
+"colorscheme basic-dark
+colorscheme afterglow
+"colorscheme twilight256
+"colorscheme molokai_dark
+
+
 
 "---- END INIT CONFIGS ----"
-
-
-
-
 
 
 "---- JAVASCRIPT PLUGINS AND CONFIGURATIONS -----"
@@ -38,12 +47,29 @@ let g:javascript_plugin_jsdoc=1
 "---- END of JAVASCRIPT PLUGINS AND CONFIGURATIONS ----"
 
 
+" ----- VIM PLUGINS -------""
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
+" ----- END OF VIM PLUGINS ----- 
+
+
 
 
 
 
 
 " ----- CONFIGURATION SECTION ----- "
+
+
+" FZF (Fuzzy Finder) -  If installed using Homebrew
+set rtp+=/usr/local/opt/fzf
+
 
 " Uncomment below to set the max textwidth. Use a value corresponding to the width of your screen."
 set textwidth=79
@@ -85,6 +111,21 @@ set expandtab
 "Always display the status line"
 set laststatus=2
 
+" ----- Multicursor Configurations ----- "
+
+"let g:multi_cursor_use_default_mapping=0
+"
+" Default mapping
+"let g:multi_cursor_start_word_key      = '<C-g>'
+"let g:multi_cursor_select_all_word_key = '<A-n>'
+"let g:multi_cursor_start_key           = 'g<C-n>'
+"let g:multi_cursor_select_all_key      = 'g<A-n>'
+"let g:multi_cursor_next_key            = '<C-g>'
+"let g:multi_cursor_prev_key            = '<C-p>'
+"let g:multi_cursor_skip_key            = '<C-x>'
+"let g:multi_cursor_quit_key            = '<Esc>'
+
+" ----- END of Multicursor Configurations ----- 
 
 
 " ----- Syntastic Configurations ----- 
@@ -97,7 +138,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
+"let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_javascript_checkers = ['eslint']
 " ----- END of Syntastic Configurations ----- 
 
 
@@ -106,10 +148,41 @@ let g:syntastic_check_on_wq = 0
 " Refer --> https://github.com/vim-airline/vim-airline
 " Automatically displays all buffers when there's only one tab open
 let g:airline#extensions#tabline#enabled = 1 
-let g:airline_powerline_fonts = 1 
+"let g:airline_powerline_fonts = 1 
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+"let g:airline_left_sep = '»'
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+"let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = ''
+
 let g:airline_theme='molokai'
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1 
+"let g:hybrid_custom_term_colors = 1
+"let g:hybrid_reduced_contrast = 1 
+let g:airline#extensions#tabline#left_sep = '   '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'default'
 
 "Mappings for toggling between tabs
 " Toggle Next Tab
@@ -120,13 +193,26 @@ nmap <C-l> :bprev<CR>
 nmap <C-f> :bfirst<CR>
 "Toggle Last Tab
 nmap <C-e> :blast<CR>
-
+"Close selected Tab
+nmap <C-x> :bd<CR>
 " ----- END of Vim-Airline configurations -----
 
 
 
+" ----- Syntastic Configurations----- 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-" Display 5 lines above/below the cursor when scrolling with a mouse.
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"----- END OF Syntastic Configurations ----- 
+
+
+
+"Display 5 lines above/below the cursor when scrolling with a mouse.
 set scrolloff=5
 
 " Fixes common backspace problems
@@ -149,7 +235,7 @@ let base16colorspace=256  " Access colors present in 256 colorspace
 set background=dark
 
 try
-    colorscheme desert
+    " colorscheme molokai
     " colorscheme spacegray 
     " colorscheme spacemacs-theme 
 
@@ -164,9 +250,6 @@ set showcmd
 
 " Highlight matching pairs of brackets. Use the '%' character to jump between them.
 set matchpairs+=<:>
-
-" Highlight matching search patterns
-set hlsearch
 
 " Enable incremental search
 set incsearch
